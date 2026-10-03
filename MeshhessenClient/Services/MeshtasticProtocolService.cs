@@ -2649,8 +2649,8 @@ public class MeshtasticProtocolService
                     ReplyId = replyId
                 },
                 Id = packetId,
-                WantAck = false,
-                HopLimit = 7,
+                WantAck = destinationId != 0xFFFFFFFF,
+                HopLimit = 10,
                 HopStart = 0
             };
 
