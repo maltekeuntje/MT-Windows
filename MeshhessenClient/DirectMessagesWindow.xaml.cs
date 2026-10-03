@@ -27,6 +27,7 @@ public partial class DirectMessagesWindow : Window
         InitializeComponent();
         _protocolService = protocolService;
         _myNodeId = myNodeId;
+        _protocolService.DeliveryStatusReceived += OnDeliveryStatusReceived;
         DmTabControl.SelectionChanged += DmTabControl_SelectionChanged;
     }
 
@@ -40,9 +41,11 @@ public partial class DirectMessagesWindow : Window
                 System.Windows.Threading.DispatcherPriority.Loaded);
     }
 
-    public void UpdateProtocolService(MeshtasticProtocolService protocolService)
+        public void UpdateProtocolService(MeshtasticProtocolService protocolService)
     {
+        _protocolService.DeliveryStatusReceived -= OnDeliveryStatusReceived;
         _protocolService = protocolService;
+        _protocolService.DeliveryStatusReceived += OnDeliveryStatusReceived;
     }
 
     // Called by MainWindow when a node's NodeInfo arrives: resolve "Unknown"
@@ -675,6 +678,7 @@ public partial class DirectMessagesWindow : Window
                     FromId = _myNodeId,
                     ToId = toNodeId,
                     IsOwnMessage = true,
+                    DeliveryState = DeliveryState.Pending,
                     ReplyId = replyId,
                     ReplyFromName = replyTarget?.From ?? string.Empty,
                     ReplyPreview = replyTarget?.Message?.Length > 60 ? replyTarget.Message[..60] + "…" : replyTarget?.Message ?? string.Empty
@@ -698,7 +702,36 @@ public partial class DirectMessagesWindow : Window
             MessageBox.Show($"Fehler beim Senden: {ex.Message}", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+    // Routing-ACK/NAK vom Protokoll-Service: Zustellstatus der passenden DM aktualisieren.
+    private void OnDeliveryStatusReceived(object? sender, (uint RequestId, uint FromId, string Error) status)
+    {
+     Dispatcher.BeginInvoke(() =>
+        {
+            // Nur eigene, gesendete DMs, die wir kennen
+            if (!_dmMessageById.TryGetValue(status.RequestId, out var msg) || !msg.IsOwnMessage)
+                return;
 
+            // Lokales ACK des eigenen Nodes heißt nur "Paket übernommen" – ignorieren
+            if (status.FromId == _myNodeId && string.IsNullOrEmpty(status.Error))
+                return;
+
+            // Ein bestätigtes "zugestellt" wird nicht mehr überschrieben
+            if (msg.DeliveryState == DeliveryState.Delivered)
+                return;
+
+            if (string.IsNullOrEmpty(status.Error))
+            {
+                msg.DeliveryState = DeliveryState.Delivered;
+            }
+            else
+            {
+                msg.DeliveryError = status.Error;
+                msg.DeliveryState = DeliveryState.Failed;
+            }
+
+            Services.Logger.WriteLine($"[DM-ACK] Nachricht {status.RequestId:x8} -> {msg.DeliveryState} (von !{status.FromId:x8})");
+        });
+    }
     private void UpdateStatusBar()
     {
         StatusText.Text = _conversations.Count == 1
