@@ -156,6 +156,53 @@ public class MessageItem : INotifyPropertyChanged
     // Sender node id -> display name, for the reaction tooltip.
     private readonly Dictionary<uint, string> _reactionSenderNames = new();
 
+        // Zustellstatus einer ausgehenden DM (ACK/NAK vom Ziel-Node).
+    private DeliveryState _deliveryState = DeliveryState.None;
+    public DeliveryState DeliveryState
+    {
+        get => _deliveryState;
+        set
+        {
+            _deliveryState = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DeliveryState)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasDeliveryState)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DeliveryDisplay)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DeliveryColorHex)));
+        }
+    }
+
+    // Fehlergrund aus einem Routing-NAK, z. B. "MaxRetransmit".
+    private string _deliveryError = string.Empty;
+    public string DeliveryError
+    {
+        get => _deliveryError;
+        set
+        {
+            _deliveryError = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DeliveryDisplay)));
+        }
+    }
+
+    public bool HasDeliveryState => _deliveryState != DeliveryState.None;
+
+    public string DeliveryDisplay => _deliveryState switch
+    {
+        DeliveryState.Pending   => "⏳ wird gesendet…",
+        DeliveryState.Delivered => "✓ zugestellt",
+        DeliveryState.Failed    => string.IsNullOrEmpty(_deliveryError)
+                                       ? "✗ nicht zugestellt"
+                                       : $"✗ nicht zugestellt ({_deliveryError})",
+        _ => string.Empty
+    };
+
+    public string DeliveryColorHex => _deliveryState switch
+    {
+        DeliveryState.Pending   => "#FFA000",  // orange
+        DeliveryState.Delivered => "#43A047",  // grün
+        DeliveryState.Failed    => "#E53935",  // rot
+        _ => "#9E9E9E"
+    };
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public void AddReaction(string emoji, uint senderNodeId, string senderName = "")
@@ -181,4 +228,14 @@ public class MessageItem : INotifyPropertyChanged
             .Select(kv => $"{kv.Key}  " + string.Join(", ", kv.Value.Select(id =>
                 _reactionSenderNames.TryGetValue(id, out var n) && !string.IsNullOrEmpty(n) ? n : $"!{id:x8}"))));
     }
+}
+
+
+/// <summary>Zustellstatus einer ausgehenden DM.</summary>
+public enum DeliveryState
+{
+    None,       // kein Tracking (Kanalnachrichten, empfangene Nachrichten, Verlauf)
+    Pending,    // gesendet, warte auf ACK vom Ziel-Node
+    Delivered,  // ACK vom Ziel-Node erhalten
+    Failed      // NAK erhalten (z. B. MaxRetransmit)
 }
