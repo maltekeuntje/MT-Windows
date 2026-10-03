@@ -99,7 +99,8 @@ public class MeshtasticProtocolService
     public event EventHandler<int>? PacketCountChanged;
     public event EventHandler<TracerouteResult>? TracerouteReceived;
     public event EventHandler<(uint ReplyId, string Emoji, uint FromId)>? ReactionReceived;
-    public event EventHandler<(uint NodeId, float BatteryPercent, float Voltage)>? DeviceTelemetryReceived;
+    /// <summary>Routing-ACK/NAK zu einem gesendeten Paket: (RequestId, FromId, Error). Error leer = ACK.</summary>
+    public event EventHandler<(uint RequestId, uint FromId, string Error)>? DeliveryStatusReceived;   public event EventHandler<(uint NodeId, float BatteryPercent, float Voltage)>? DeviceTelemetryReceived;
     /// <summary>Fired when rx_time of a received packet differs from local UTC by more than <see cref="TimeDriftThresholdSeconds"/>.</summary>
     public event EventHandler<int>? TimeDriftDetected;  // arg: observed drift in seconds
     public event EventHandler<TelemetryDatabaseService.WaypointEntry>? WaypointReceived;
@@ -1784,6 +1785,10 @@ public class MeshtasticProtocolService
                             Logger.WriteLine($"[Routing] ACK from !{packet.From:x8} for request {data.RequestId:x8}");
                         else
                             Logger.WriteLine($"[Routing] *** NAK from !{packet.From:x8} for request {data.RequestId:x8}: {routing.ErrorReason} ***");
+                         
+                        if (data.RequestId != 0)
+                            DeliveryStatusReceived?.Invoke(this, (data.RequestId, packet.From,
+                                routing.ErrorReason == Routing.Types.Error.None ? string.Empty : routing.ErrorReason.ToString()));   
                     }
                 }
                 catch (Exception ex)
