@@ -100,7 +100,8 @@ public class MeshtasticProtocolService
     public event EventHandler<TracerouteResult>? TracerouteReceived;
     public event EventHandler<(uint ReplyId, string Emoji, uint FromId)>? ReactionReceived;
     /// <summary>Routing-ACK/NAK zu einem gesendeten Paket: (RequestId, FromId, Error). Error leer = ACK.</summary>
-    public event EventHandler<(uint RequestId, uint FromId, string Error)>? DeliveryStatusReceived;   public event EventHandler<(uint NodeId, float BatteryPercent, float Voltage)>? DeviceTelemetryReceived;
+    public event EventHandler<(uint RequestId, uint FromId, string Error)>? DeliveryStatusReceived;
+    public event EventHandler<(uint NodeId, float BatteryPercent, float Voltage)>? DeviceTelemetryReceived;
     /// <summary>Fired when rx_time of a received packet differs from local UTC by more than <see cref="TimeDriftThresholdSeconds"/>.</summary>
     public event EventHandler<int>? TimeDriftDetected;  // arg: observed drift in seconds
     public event EventHandler<TelemetryDatabaseService.WaypointEntry>? WaypointReceived;
@@ -2655,7 +2656,7 @@ public class MeshtasticProtocolService
                 },
                 Id = packetId,
                 WantAck = destinationId != 0xFFFFFFFF,
-                HopLimit = 10,
+                HopLimit = 7,
                 HopStart = 0
             };
 
