@@ -79,7 +79,7 @@ public sealed class MqttProxyService : IDisposable
 
         // ── build client options ──────────────────────────────────────────────
         var nodeIdHex  = $"{myNodeId:x8}";
-        var clientId   = $"meshhessenclient-{_appVersion}-!{nodeIdHex}";
+        var clientId   = $"loracontrol-{_appVersion}-!{nodeIdHex}";
 
         var optBuilder = new MqttClientOptionsBuilder()
             .WithClientId(clientId)

@@ -42,7 +42,7 @@ public class VectorTileCacheService
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
         // Server ACL requires MeshhessenClient/* user agent (same as raster server)
         client.DefaultRequestHeaders.UserAgent.ParseAdd(
-            $"MeshhessenClient/{version} (+https://meshhessenclient.de; contact: admin@meshhessenclient.de)");
+            $"LoRa-Control/{version} (+https://github.com/maltekeuntje/MT-Windows)");
         return client;
     }
 

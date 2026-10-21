@@ -127,7 +127,7 @@
     <sys:String x:Key="StrAddChannel">Kanal hinzufügen</sys:String>
     <sys:String x:Key="StrDeleteChannel">Kanal löschen</sys:String>
     <sys:String x:Key="StrBrowseChannels">Aus Liste...</sys:String>
-    <sys:String x:Key="StrMeshHessenChannel">Mesh-Hessen Kanal hinzufügen</sys:String>
+    <sys:String x:Key="StrMeshHessenChannel">Kanalprofil hinzufügen</sys:String>
 
     <!-- Settings tab -->
     <sys:String x:Key="StrAppearance">Darstellung</sys:String>
@@ -151,14 +151,14 @@
     <sys:String x:Key="StrImportTilesZip">Maptiles aus Zip laden...</sys:String>
     <sys:String x:Key="StrMapMode">Karten-Modus:</sys:String>
     <sys:String x:Key="StrMapModeOffline">Offline (Standard)</sys:String>
-    <sys:String x:Key="StrMapModeOfflineDesc">Nutzt vorher heruntergeladene Kacheln vom Meshhessen-Server. Alle drei Kartenstile verfügbar. Nur Deutschland abgedeckt. Kein Internet erforderlich.</sys:String>
-    <sys:String x:Key="StrMapModeOnlineOwn">Online – Meshhessen-Server (nur Deutschland)</sys:String>
-    <sys:String x:Key="StrMapModeOnlineOwnDesc">Lädt fehlende Kacheln bei Bedarf direkt vom Meshhessen-Server und speichert sie dauerhaft lokal. Alle drei Kartenstile verfügbar. Nur Deutschland abgedeckt. Internet erforderlich.</sys:String>
+    <sys:String x:Key="StrMapModeOfflineDesc">Nutzt vorher heruntergeladene Kacheln. Alle drei Kartenstile verfügbar. Nur Deutschland abgedeckt. Kein Internet erforderlich.</sys:String>
+    <sys:String x:Key="StrMapModeOnlineOwn">Online – externer Kartenserver (nur Deutschland)</sys:String>
+    <sys:String x:Key="StrMapModeOnlineOwnDesc">Lädt fehlende Kacheln bei Bedarf direkt vom externen Kartenserver und speichert sie dauerhaft lokal. Alle drei Kartenstile verfügbar. Nur Deutschland abgedeckt. Internet erforderlich.</sys:String>
     <sys:String x:Key="StrMapModeOnlineCustom">Online – eigener Tile-Server</sys:String>
     <sys:String x:Key="StrMapModeOnlineCustomDesc">Lädt fehlende Kacheln bei Bedarf vom selbst konfigurierten Tile-Server (Tile-URLs unten) und speichert sie dauerhaft lokal. Öffentliche OSM-/OpenTopoMap-Server sind hier nicht zulässig – dafür den Modus „Online – OpenStreetMap" verwenden. Internet erforderlich.</sys:String>
     <sys:String x:Key="StrCustomTileServerPublicBlocked">Der Modus „Online – eigener Tile-Server" kann nicht mit öffentlichen OSM-/OpenTopoMap-URLs verwendet werden (Tile-Usage-Policy). Bitte einen eigenen Server eintragen oder den Modus „Online – OpenStreetMap" wählen.</sys:String>
     <sys:String x:Key="StrMapModeOnlineOsm">Online – OpenStreetMap (weltweit)</sys:String>
-    <sys:String x:Key="StrMapModeOnlineOsmWarn">⚠ Bitte beachten: Der OSM-Tile-Server ist spendenfinanziert und nur für interaktive Nutzung vorgesehen. Bitte diesen Modus nur nutzen, wenn kein Meshhessen-Server verfügbar ist (z. B. außerhalb Deutschlands). Nur der Standard-Kartenstil ist verfügbar (kein Topo/Dark). Kein manueller Tile-Download in diesem Modus. Angesehene Kacheln werden lokal zwischengespeichert.</sys:String>
+    <sys:String x:Key="StrMapModeOnlineOsmWarn">⚠ Bitte beachten: Der OSM-Tile-Server ist spendenfinanziert und nur für interaktive Nutzung vorgesehen. Nur der Standard-Kartenstil ist verfügbar (kein Topo/Dark). Kein manueller Tile-Download in diesem Modus. Angesehene Kacheln werden lokal zwischengespeichert.</sys:String>
     <sys:String x:Key="StrMapModeOnlineOsmSourceLocked">Im OSM-Online-Modus ist nur die Standardkarte verfügbar.</sys:String>
     <sys:String x:Key="StrMapRenderMode">Kartendarstellung:</sys:String>
     <sys:String x:Key="StrMapRenderRaster">Raster (bewährt, maximal kompatibel)</sys:String>
@@ -430,7 +430,7 @@
     <sys:String x:Key="StrNcDescDoubleTap">Beschleunigungssensor: Doppeltippen auf das Gehäuse löst den Tastenknopf aus (z. B. für GPS-Toggle).</sys:String>
     <sys:String x:Key="StrNcDescLoraRegion">Gesetzliche Frequenzregion. In Deutschland / EU: EU_868 (868 MHz Band).</sys:String>
     <sys:String x:Key="StrNcDescUsePreset">Empfohlen: Preset verwenden. Nur deaktivieren für manuelle Anpassung von Bandbreite und Spreading-Faktor.</sys:String>
-    <sys:String x:Key="StrNcDescModemPreset">Höherer Spreading Factor (SF) = bessere Empfindlichkeit und mehr Reichweite, aber geringerer Durchsatz. · VERY_LONG_SLOW (SF12, 62,5 kHz) = maximale Reichweite, ~90 bps · LONG_SLOW (SF12, 125 kHz) = sehr große Reichweite, ~180 bps · LONG_FAST (SF11, 250 kHz) = gute Reichweite, ~1 kbit/s – Meshtastic-Standard · SHORT_SLOW (SF8, 250 kHz) = deutlich kürzere Reichweite, ~8 kbit/s – Standard im Mesh Hessen für dichte Netze · SHORT_FAST (SF7) = kürzeste Reichweite, ~17 kbit/s. Alle Nodes im Mesh müssen dasselbe Preset verwenden.</sys:String>
+    <sys:String x:Key="StrNcDescModemPreset">Höherer Spreading Factor (SF) = bessere Empfindlichkeit und mehr Reichweite, aber geringerer Durchsatz. · VERY_LONG_SLOW (SF12, 62,5 kHz) = maximale Reichweite, ~90 bps · LONG_SLOW (SF12, 125 kHz) = sehr große Reichweite, ~180 bps · LONG_FAST (SF11, 250 kHz) = gute Reichweite, ~1 kbit/s – Meshtastic-Standard · SHORT_SLOW (SF8, 250 kHz) = deutlich kürzere Reichweite, ~8 kbit/s · SHORT_FAST (SF7) = kürzeste Reichweite, ~17 kbit/s. Alle Nodes im Mesh müssen dasselbe Preset verwenden.</sys:String>
     <sys:String x:Key="StrNcDescHopLimit">Max. Anzahl Weiterleitungen (Hops) pro Paket. Standard: 3. Höhere Werte erhöhen die Netzlast erheblich.</sys:String>
     <sys:String x:Key="StrNcDescTxPower">Sendeleistung in dBm. 0 = maximale für die gewählte Region erlaubte Leistung (empfohlen).</sys:String>
     <sys:String x:Key="StrNcDescChannelNum">Frequenz-Slot innerhalb der Region. 0 = wird automatisch aus dem Channel-Namen berechnet (Hash) – Standard für alle normalen Setups. Nur manuell setzen, wenn ein bestimmter Frequenz-Slot gezielt genutzt werden soll (Experten-Einstellung).</sys:String>
@@ -464,7 +464,7 @@
     <sys:String x:Key="StrNcDescMqttJson">Sendet zusätzlich entschlüsselte Pakete als JSON-Text (z. B. für Home Assistant, Node-RED, Grafana).</sys:String>
     <sys:String x:Key="StrNcDescMqttRootTopic">Basis-Topic für alle MQTT-Nachrichten dieses Geräts. Standard: msh</sys:String>
     <sys:String x:Key="StrNcDescMqttProxy">Die verbundene App (Telefon/PC) leitet MQTT-Nachrichten für das Gerät weiter – kein direktes WLAN am Gerät nötig. Hinweis: Dieser Windows-Client unterstützt den Proxy-Modus aktuell nicht aktiv.</sys:String>
-    <sys:String x:Key="StrNcDescMqttMapReport">Sendet die eigene Position an die öffentliche Meshtastic-Weltkarte (map.meshtastic.org) und an map.meshhessen.de.</sys:String>
+    <sys:String x:Key="StrNcDescMqttMapReport">Sendet die eigene Position an die öffentliche Meshtastic-Weltkarte (map.meshtastic.org).</sys:String>
     <sys:String x:Key="StrNcMqttMapReportPrecision">Genauigkeit Map Report</sys:String>
     <sys:String x:Key="StrNcDescMqttMapReportPrecision">Positions-Genauigkeit für Map-Report-Pakete. Empfohlen: ~370m oder höher für öffentliche Karten.</sys:String>
     <sys:String x:Key="StrNcDescDeviceTelemetry">Gerätemetriken: Akku-%, Spannung, Kanalauslastung, TX-Airtime. Erscheinen im Telemetrie-Fenster des Clients.</sys:String>
@@ -1363,8 +1363,8 @@ Grün ≤15% | Gelb 15–25% | Rot &gt;25% | Grau = keine Airtime-Daten</sys:Str
     <sys:String x:Key="StrKioskLockRemoteAdmin">Fernverwaltung (Remote Admin)</sys:String>
     <sys:String x:Key="StrKioskLockDashboard">Telemetrie-Dashboard</sys:String>
     <sys:String x:Key="StrKioskLockSos">SOS / Alert Bell senden</sys:String>
-    <sys:String x:Key="StrKioskLockMeshHessen">Meshhessen-Schnellkonfiguration</sys:String>
-    <sys:String x:Key="StrKioskForgotHint">Passwort vergessen? Client beenden und in der Datei meshhessen-client.ini die Zeile „KioskModeEnabled=True" auf „False" setzen.</sys:String>
+    <sys:String x:Key="StrKioskLockMeshHessen">LoRa-Control-Schnellkonfiguration</sys:String>
+    <sys:String x:Key="StrKioskForgotHint">Passwort vergessen? Client beenden und in der Datei lora-control.ini (im Programmordner von LoRa-Control) die Zeile „KioskModeEnabled=True" auf „False" setzen.</sys:String>
     <sys:String x:Key="StrKioskUnlockTitle">Kiosk-Modus entsperren</sys:String>
     <sys:String x:Key="StrKioskUnlockPrompt">Passwort eingeben:</sys:String>
     <sys:String x:Key="StrKioskWrongPassword">Falsches Passwort.</sys:String>
@@ -1411,7 +1411,7 @@ Was macht dieser Assistent?
   • Wählt Zoom-Stufe und Kartentyp (OSM, OpenTopo, OSM Dark)
   • Kopiert bereits vorhandene Tiles direkt — und lädt fehlende nach
 
-ℹ️ Karten sind nur für Deutschland verfügbar (eigener Meshhessen-Tile-Server).
+ℹ️ Karten sind nur für Deutschland verfügbar.
 
 Die Downloads sind additiv: Bereits vorhandene Tiles auf der SD-Karte werden nicht erneut übertragen.</sys:String>
 

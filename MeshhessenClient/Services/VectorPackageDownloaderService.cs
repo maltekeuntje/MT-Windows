@@ -29,7 +29,7 @@ public static class VectorPackageDownloaderService
         var handler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All };
         var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(30) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(
-            $"MeshhessenClient/{version} (+https://meshhessenclient.de; contact: admin@meshhessenclient.de)");
+            $"LoRa-Control/{version} (+https://github.com/maltekeuntje/MT-Windows)");
         return client;
     }
 

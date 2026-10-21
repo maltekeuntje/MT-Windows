@@ -36,7 +36,7 @@ echo Build erfolgreich!
 echo ========================================
 echo.
 echo Debug EXE: publish-debug\MeshhessenClient.exe
-echo Log-Datei: publish-debug\meshhessen-client.log
+echo Log-Datei: publish-debug\lora-control.log
 echo.
 echo HINWEIS: Debug-Build zeigt detaillierte Ausgaben in DebugView.
 echo.

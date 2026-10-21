@@ -42,7 +42,7 @@ public record AppSettings
     public int PositionHistoryHours { get; init; } = 24;        // Position history on map (0=unlimited)
     public bool AutoTimeSyncOnConnect { get; init; } = true;    // Send time sync packet after connection init
     public int TimeSyncDriftThresholdSeconds { get; init; } = 300;  // Trigger time sync above N seconds drift
-    public string MapMode { get; init; } = "offline";          // "offline", "online-own", "online-custom", "online-osm"
+    public string MapMode { get; init; } = "online-osm";          // "offline", "online-own", "online-custom", "online-osm"
     public bool EnableMessageDb { get; init; } = true;         // Persist messages in SQLite DB
     public int MessageDbRetentionDays { get; init; } = 90;     // 0=unlimited, 30/90/365
     public string LastConnectionType { get; init; } = "Serial"; // "Serial", "Bluetooth", "Tcp"
@@ -73,7 +73,23 @@ public record AppSettings
 
 public static class SettingsService
 {
-    private static string IniFilePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "meshhessen-client.ini");
+    // LoRa-Control keeps its settings in lora-control.ini; an existing meshhessen-client.ini is
+    // copied over once so settings survive the rename.
+    private static string IniFilePath
+    {
+        get
+        {
+            var dir = AppDomain.CurrentDomain.BaseDirectory;
+            var path = Path.Combine(dir, "lora-control.ini");
+            var legacy = Path.Combine(dir, "meshhessen-client.ini");
+            if (!File.Exists(path) && File.Exists(legacy))
+            {
+                try { File.Copy(legacy, path); }
+                catch { return legacy; }
+            }
+            return path;
+        }
+    }
 
     public static AppSettings Load()
     {

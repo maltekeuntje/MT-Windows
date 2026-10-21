@@ -73,12 +73,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="logo_mh_wide.jpg" />
+    <None Remove="Resources\lora_control_wide.png" />
     <None Remove="Resources\app.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="logo_mh_wide.jpg" />
+    <Resource Include="Resources\lora_control_wide.png" />
     <Resource Include="Resources\app.ico" />
     <Resource Include="Resources\Strings.de.xaml" />
     <Resource Include="Resources\Strings.en.xaml" />

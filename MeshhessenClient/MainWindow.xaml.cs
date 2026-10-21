@@ -193,7 +193,7 @@ public partial class MainWindow : Window
         var fullVersionStr = version != null
             ? "v" + version.ToString(version.Revision > 0 ? 4 : 3)
             : "";
-        Title = $"Meshhessen Client {versionStr}";
+        Title = $"LoRa-Control {versionStr}";
         AboutVersionText.Text = fullVersionStr;
         FooterVersionText.Text = versionStr;
 
@@ -209,7 +209,7 @@ public partial class MainWindow : Window
             }),
             TryFindResource("StrToastSummaryTitle") as string ?? "{0} neue Nachrichten");
 
-        Loaded += (_, _) => _ = CheckForUpdateAsync();
+        // LoRa-Control: no update check against the upstream Meshhessen releases.
         _midnightTimer = new System.Threading.Timer(_ => CheckMidnight(), null,
             TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30));
 
@@ -4904,7 +4904,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "MeshhessenClient");
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "LoRa-Control");
             var json = await _httpClient.GetStringAsync(
                 "https://api.github.com/repos/SMLunchen/mh_windowsclient/releases");
 
@@ -5192,9 +5192,9 @@ public partial class MainWindow : Window
 
     private void ShowLogoEasterEgg()
     {
-        var myShortName = _allNodes.FirstOrDefault(n => n.NodeId == _myNodeId)?.ShortName ?? "MH";
+        var myShortName = _allNodes.FirstOrDefault(n => n.NodeId == _myNodeId)?.ShortName ?? "LC";
         // Classic ham radio CQ call: CQ CQ CQ DE [CALLSIGN] MESHHESSEN QTH HESSEN 73 SK
-        var cwText = $"CQ DE {myShortName.ToUpper()} MESHHESSEN 73 SK";
+        var cwText = $"CQ DE {myShortName.ToUpper()} LORACONTROL 73 SK";
         Task.Run(() => BeepMorse(cwText));
     }
 

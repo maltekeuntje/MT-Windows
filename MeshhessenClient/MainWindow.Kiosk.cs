@@ -30,7 +30,7 @@ public partial class MainWindow
 {
     // ── Kiosk / Training mode ─────────────────────────────────────────────────
     // Accident protection for shared stations, not a security boundary:
-    // anyone who can edit meshhessen-client.ini can disable it (documented).
+    // anyone who can edit lora-control.ini can disable it (documented).
 
     private static string KioskHashPassword(string password)
     {
@@ -117,7 +117,7 @@ public partial class MainWindow
         RemoteAdminButton.Visibility   = vis("RemoteAdmin");
         OpenDashboardButton.Visibility = vis("Dashboard");
         AlertBellButton.Visibility     = vis("Sos");
-        MeshHessenButton.Visibility    = vis("MeshHessen");
+        MeshHessenButton.Visibility    = Visibility.Collapsed; // Mesh-Hessen profile is not offered in LoRa-Control
 
         // Enforce VNode admin blocking while locked (revert to setting when unlocked)
         if (_virtualNodeService != null)

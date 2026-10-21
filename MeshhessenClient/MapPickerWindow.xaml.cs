@@ -33,7 +33,7 @@ public partial class MapPickerWindow : Window
             _map = new Mapsui.Map();
 
             // Use the same tile layer as the main map; fall back to online OSM if no factory provided
-            var tileLayer = _tileLayerFactory?.Invoke() ?? OpenStreetMap.CreateTileLayer("MeshhessenClient/MapPicker");
+            var tileLayer = _tileLayerFactory?.Invoke() ?? OpenStreetMap.CreateTileLayer("LoRa-Control/MapPicker");
             _map.Layers.Add(tileLayer);
 
             _markerLayer = new MemoryLayer("Marker") { Features = _markerFeatures, Style = null };

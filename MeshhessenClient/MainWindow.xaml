@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         ui:WindowHelper.UseModernWindowStyle="True"
         Icon="pack://application:,,,/Resources/app.ico"
-        Title="Meshhessen Client"
+        Title="LoRa-Control"
         Height="700"
         Width="1240"
         MinHeight="450"
@@ -684,7 +684,7 @@
                                  DisplayMemberPath="Name"
                                  Visibility="Collapsed"/>
                         <Image x:Name="mh_logo_wide_top" Grid.Column="2" Height="56" Width="286"
-                               Source="/logo_mh_wide.jpg" HorizontalAlignment="Right"
+                               Source="/Resources/lora_control_wide.png" HorizontalAlignment="Right"
                                Cursor="Arrow" MouseLeftButtonUp="Logo_Click"/>
                     </Grid>
 
@@ -1628,7 +1628,7 @@
                         <Button Content="{DynamicResource StrAddChannel}" Margin="0,0,10,0" Click="AddChannel_Click"/>
                         <Button Content="{DynamicResource StrDeleteChannel}" Margin="0,0,10,0" Click="DeleteChannel_Click"/>
                         <Button Content="{DynamicResource StrBrowseChannels}" Margin="0,0,10,0" Click="BrowseChannels_Click"/>
-                        <Button x:Name="MeshHessenButton" Content="{DynamicResource StrMeshHessenChannel}"
+                        <Button x:Name="MeshHessenButton" Visibility="Collapsed" Content="{DynamicResource StrMeshHessenChannel}"
                                 Margin="0,0,10,0" Click="AddMeshHessenChannel_Click"
                                 Background="#FF2E7D32" Foreground="White" FontWeight="Bold"/>
                     </StackPanel>
@@ -2060,11 +2060,11 @@
                                               FontSize="11" Foreground="Gray" FontStyle="Italic"
                                               TextWrapping="Wrap" Margin="20,0,0,8"/>
 
-                                    <!-- Online Meshhessen -->
-                                    <RadioButton x:Name="MapModeOnlineOwnRadio" GroupName="MapMode"
+                                    <!-- Online external tile server (hidden in LoRa-Control) -->
+                                    <RadioButton x:Name="MapModeOnlineOwnRadio" Visibility="Collapsed" GroupName="MapMode"
                                                 Content="{DynamicResource StrMapModeOnlineOwn}"
                                                 Margin="0,0,0,2" Checked="MapModeRadio_Changed"/>
-                                    <TextBlock Text="{DynamicResource StrMapModeOnlineOwnDesc}"
+                                    <TextBlock Text="{DynamicResource StrMapModeOnlineOwnDesc}" Visibility="Collapsed"
                                               FontSize="11" Foreground="Gray" FontStyle="Italic"
                                               TextWrapping="Wrap" Margin="20,0,0,8"/>
 
@@ -2329,7 +2329,7 @@
                                         <CheckBox x:Name="KioskLockRemoteAdminCheckBox" Content="{DynamicResource StrKioskLockRemoteAdmin}" Margin="0,0,14,4"/>
                                         <CheckBox x:Name="KioskLockDashboardCheckBox"   Content="{DynamicResource StrKioskLockDashboard}"   Margin="0,0,14,4"/>
                                         <CheckBox x:Name="KioskLockSosCheckBox"         Content="{DynamicResource StrKioskLockSos}"         Margin="0,0,14,4"/>
-                                        <CheckBox x:Name="KioskLockMeshHessenCheckBox"  Content="{DynamicResource StrKioskLockMeshHessen}"  Margin="0,0,14,4"/>
+                                        <CheckBox x:Name="KioskLockMeshHessenCheckBox" Visibility="Collapsed"  Content="{DynamicResource StrKioskLockMeshHessen}"  Margin="0,0,14,4"/>
                                     </WrapPanel>
                                     <TextBlock Text="{DynamicResource StrKioskForgotHint}"
                                               FontStyle="Italic" Foreground="Gray" FontSize="11"
@@ -2429,7 +2429,7 @@
             <TabItem x:Name="TabItemInfo" Header="{DynamicResource StrTabInfo}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="20">
-                        <TextBlock Text="Meshhessen Client" FontSize="24" FontWeight="Bold" Margin="0,0,0,4"/>
+                        <TextBlock Text="LoRa-Control" FontSize="24" FontWeight="Bold" Margin="0,0,0,4"/>
                         <TextBlock x:Name="AboutVersionText" FontSize="16" Foreground="Gray" Margin="0,0,0,16"/>
                         <TextBlock Text="{DynamicResource StrAboutDescription}"
                                   TextWrapping="Wrap" Margin="0,0,0,20"/>
@@ -2575,8 +2575,8 @@
                             <StackPanel>
                                 <TextBlock Text="{DynamicResource StrProjectTitle}" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
                                 <TextBlock TextWrapping="Wrap" FontSize="11">
-                                    <Hyperlink NavigateUri="https://www.meshhessen.de" RequestNavigate="Hyperlink_RequestNavigate">
-                                        <Run Text="www.meshhessen.de"/>
+                                    <Hyperlink NavigateUri="https://github.com/maltekeuntje/MT-Windows" RequestNavigate="Hyperlink_RequestNavigate">
+                                        <Run Text="github.com/maltekeuntje/MT-Windows"/>
                                     </Hyperlink>
                                 </TextBlock>
                             </StackPanel>
@@ -2753,8 +2753,8 @@
                     <TextBlock x:Name="FooterVersionText" VerticalAlignment="Center" Foreground="Gray" Margin="0,0,12,0" FontSize="11"/>
                     <Image Source="pack://application:,,,/Resources/app.ico" Width="16" Height="16" Margin="0,0,6,0" VerticalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center">
-                        <Hyperlink NavigateUri="https://www.meshhessen.de" RequestNavigate="Hyperlink_RequestNavigate">
-                            <Run Text="www.meshhessen.de" FontWeight="Bold"/>
+                        <Hyperlink NavigateUri="https://github.com/maltekeuntje/MT-Windows" RequestNavigate="Hyperlink_RequestNavigate">
+                            <Run Text="LoRa-Control" FontWeight="Bold"/>
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>

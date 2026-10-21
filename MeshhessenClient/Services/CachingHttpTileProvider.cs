@@ -46,7 +46,7 @@ public class CachingHttpTileProvider : ITileProvider
 
         // OSM policy: app name + contact URL/email required
         client.DefaultRequestHeaders.UserAgent.ParseAdd(
-            $"MeshhessenClient/{version} (+https://meshhessenclient.de; contact: admin@meshhessenclient.de)");
+            $"LoRa-Control/{version} (+https://github.com/maltekeuntje/MT-Windows)");
 
         return client;
     }

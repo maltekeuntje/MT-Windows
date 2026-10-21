@@ -18,7 +18,7 @@ public static class Logger
         {
             // Log-Datei im Anwendungsverzeichnis erstellen
             string appPath = AppDomain.CurrentDomain.BaseDirectory;
-            _logFilePath = Path.Combine(appPath, "meshhessen-client.log");
+            _logFilePath = Path.Combine(appPath, "lora-control.log");
 
             // Alte Log-Datei löschen wenn größer als 5MB
             if (File.Exists(_logFilePath))
@@ -36,7 +36,7 @@ public static class Logger
                 AutoFlush = true
             };
 
-            WriteLine("=== Meshhessen Client gestartet ===");
+            WriteLine("=== LoRa-Control gestartet ===");
             WriteLine($"Log-Datei: {_logFilePath}");
         }
         catch (Exception ex)
@@ -81,7 +81,7 @@ public static class Logger
         {
             try
             {
-                WriteLine("=== Meshhessen Client beendet ===");
+                WriteLine("=== LoRa-Control beendet ===");
                 _logWriter?.Flush();
                 _logWriter?.Close();
                 _logWriter?.Dispose();

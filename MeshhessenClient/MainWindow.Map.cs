@@ -253,7 +253,7 @@ public partial class MainWindow
                 // Server ACL requires MeshhessenClient/* UA – all requests go through
                 // our interceptor (own HttpClient), this covers anything that slips past
                 core.Settings.UserAgent =
-                    $"MeshhessenClient/{version} (+https://meshhessenclient.de; contact: admin@meshhessenclient.de)";
+                    $"LoRa-Control/{version} (+https://github.com/maltekeuntje/MT-Windows)";
                 core.Settings.AreDefaultContextMenusEnabled = false;
                 core.Settings.AreDevToolsEnabled = false;
                 core.Settings.IsStatusBarEnabled = false;

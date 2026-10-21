@@ -79,7 +79,7 @@ public partial class TDeckRegionMapWindow : Window
         }
         else
         {
-            map.Layers.Add(OpenStreetMap.CreateTileLayer("MeshhessenClient/TDeckWizard"));
+            map.Layers.Add(OpenStreetMap.CreateTileLayer("LoRa-Control/TDeckWizard"));
         }
 
         map.Layers.Add(_drawLayer);

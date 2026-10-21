@@ -12,7 +12,7 @@ public static class TDeckTileService
         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "0.0.0";
     private static readonly HttpClient _http = new()
     {
-        DefaultRequestHeaders = { { "User-Agent", $"MeshhessenClient/{_version}" } }
+        DefaultRequestHeaders = { { "User-Agent", $"LoRa-Control/{_version}" } }
     };
 
     // Folder names used on SD card (under maps/)
