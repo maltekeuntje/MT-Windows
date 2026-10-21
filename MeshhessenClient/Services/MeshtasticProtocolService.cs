@@ -81,8 +81,10 @@ public class MeshtasticProtocolService
 
     public event EventHandler<MessageItem>? MessageReceived;
     /// <summary>Raised on a ROUTING_APP ACK/NAK for one of our sent packets. <c>Delivered</c> is true
-    /// on ACK (Error.None), false on NAK — lets the UI show a delivered/failed tick + offer resend.</summary>
-    public event EventHandler<(uint PacketId, bool Delivered)>? MessageDeliveryUpdated;
+    /// on ACK (Error.None), false on NAK — lets the UI show a delivered/failed tick + offer resend.
+    /// <c>FromId</c> is the node that sent the ACK/NAK: for a DM, an ACK from our own node only means
+    /// a neighbour relayed it, not that the recipient got it.</summary>
+    public event EventHandler<(uint PacketId, bool Delivered, uint FromId)>? MessageDeliveryUpdated;
     public event EventHandler<ModelNodeInfo>? NodeInfoReceived;
     /// <summary>Raised when the internal known-node cache is cleared (see <see cref="ClearKnownNodes"/>).</summary>
     public event EventHandler? NodeDbCleared;
@@ -1869,7 +1871,7 @@ public class MeshtasticProtocolService
 
                         // Notify the chat UI about delivery of one of our own sent messages.
                         if (data.RequestId != 0)
-                            MessageDeliveryUpdated?.Invoke(this, (data.RequestId, ok));
+                            MessageDeliveryUpdated?.Invoke(this, (data.RequestId, ok, packet.From));
                     }
                 }
                 catch (Exception ex)

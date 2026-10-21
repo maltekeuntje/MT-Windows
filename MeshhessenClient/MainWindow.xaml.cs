@@ -1366,12 +1366,28 @@ public partial class MainWindow : Window
             item.Status = SendState.Failed;
     }
 
-    private void OnMessageDeliveryUpdated(object? sender, (uint PacketId, bool Delivered) e)
+    private void OnMessageDeliveryUpdated(object? sender, (uint PacketId, bool Delivered, uint FromId) e)
     {
         Dispatcher.BeginInvoke(() =>
         {
-            if (_messageById.TryGetValue(e.PacketId, out var msg) && msg.IsOwnMessage)
-                msg.Status = e.Delivered ? SendState.Delivered : SendState.Failed;
+            if (!_messageById.TryGetValue(e.PacketId, out var msg) || !msg.IsOwnMessage)
+                return;
+
+            // A confirmed delivery is final; a late NAK must not turn it red again.
+            if (msg.Status == SendState.Delivered)
+                return;
+
+            // For a DM only the recipient's ACK means delivered. An ACK from our own node is the
+            // implicit ACK of a neighbour relaying it, so the message is on its way, not delivered.
+            bool isDm = msg.ToId != 0 && msg.ToId != 0xFFFFFFFF;
+            if (isDm && e.Delivered && e.FromId == _myNodeId)
+            {
+                if (msg.Status == SendState.Sending)
+                    msg.Status = SendState.Sent;
+                return;
+            }
+
+            msg.Status = e.Delivered ? SendState.Delivered : SendState.Failed;
         });
     }
 
